@@ -5,7 +5,6 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <title>BSC Fest 2k26</title>
-
     <style>
         :root {
             --bg: #061424;
@@ -14,6 +13,7 @@
             --card: #07233a;
             --accent-2: #7fd0ff;
             --highlight: #00f2ff;
+            /* Added for neon effects */
         }
 
         html,
@@ -27,83 +27,29 @@
             overflow-x: hidden;
         }
 
-        /* ================= NEW : LOGO ================= */
-        .college-logo {
-            position: fixed;
-            top: 15px;
-            left: 15px;
-            z-index: 20;
-        }
-
-        .college-logo img {
-            height: 65px;
-            width: auto;
-            filter: drop-shadow(0 0 12px rgba(0, 242, 255, 0.7));
-        }
-
-        /* ================= NEW : CORNER MOVING LINES ================= */
-        .corner-line {
-            position: fixed;
-            width: 350px;
-            height: 2px;
-            background: linear-gradient(90deg, transparent, var(--highlight), transparent);
-            opacity: 0.75;
-            z-index: -1;
-        }
-
-        .line-top-left {
-            top: 0;
-            left: 0;
-            transform: rotate(45deg);
-            animation: moveTL 6s linear infinite;
-        }
-
-        .line-bottom-right {
-            bottom: 0;
-            right: 0;
-            transform: rotate(45deg);
-            animation: moveBR 6s linear infinite;
-        }
-
-        @keyframes moveTL {
-            from {
-                transform: translate(-300px, -300px) rotate(45deg);
-            }
-            to {
-                transform: translate(500px, 500px) rotate(45deg);
-            }
-        }
-
-        @keyframes moveBR {
-            from {
-                transform: translate(300px, 300px) rotate(45deg);
-            }
-            to {
-                transform: translate(-500px, -500px) rotate(45deg);
-            }
-        }
-
-        /* ================= EXISTING STYLES (UNCHANGED) ================= */
-
+        /* Background Animation Canvas */
         #bg-canvas {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            z-index: -2;
+            z-index: -1;
             pointer-events: none;
         }
 
         .wrap {
             min-height: 100vh;
             display: flex;
+            /* Changed to block for pages but flex for centering logic if needed */
             flex-direction: column;
             align-items: center;
             justify-content: flex-start;
+            /* Changed from center to allow scrolling */
             padding: 40px;
         }
 
+        /* Page Logic */
         .page-section {
             display: none;
             width: 100%;
@@ -116,8 +62,15 @@
         }
 
         @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
         .card {
@@ -132,7 +85,8 @@
             backdrop-filter: blur(5px);
             border: 1px solid rgba(255, 255, 255, 0.05);
         }
- /* ASCII banner */
+
+        /* ASCII banner */
         pre.ascii {
             font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, monospace;
             line-height: 1;
@@ -287,31 +241,103 @@
         }
 
         @media (max-width: 768px) {
-            .college-logo img {
-                height: 45px;
+            .grid {
+                grid-template-columns: 1fr;
             }
+
+            pre.ascii {
+                display: none;
+            }
+
+            /* Hide large ascii on mobile */
         }
+
+@media (max-width: 600px) {
+
+    .wrap {
+        padding: 15px;
+    }
+
+    .card {
+        padding: 20px;
+    }
+
+    h1.title {
+        font-size: 24px;
+    }
+
+    .event-card {
+        min-height: 120px;
+    }
+
+    .form-group[style] {
+        grid-template-columns: 1fr !important;
+    }
+
+    input, select {
+        font-size: 16px;
+    }
+
+    .btn-register {
+        font-size: 15px;
+    }
+}
+select {
+    appearance: none;
+    -webkit-appearance: none;
+    background-image: url("data:image/svg+xml;utf8,<svg fill='%2300f2ff' height='20' viewBox='0 0 24 24' width='20' xmlns='http://www.w3.org/2000/svg'><path d='M7 10l5 5 5-5z'/></svg>");
+    background-repeat: no-repeat;
+    background-position: right 10px center;
+    background-size: 18px;
+}
+        /* ===== Fixed Logo Styling ===== */
+.site-logo {
+    position: fixed;
+    top: 35px;        /* space from top */
+    left: 45px;       /* space from left */
+    width: 100px;     /* bigger size */
+    height: 100px;    /* square */
+    object-fit: cover;
+    z-index: 9999;
+
+    border-radius: 10px;   /* slight rounded square */
+    padding: 6px;
+
+    background: rgba(0, 0, 0, 0.35);
+    backdrop-filter: blur(6px);
+
+    box-shadow:
+        0 0 15px #00f2ff,
+        0 0 35px rgba(0, 242, 255, 0.7);
+
+    transition: all 0.4s ease;
+}
+
+.site-logo:hover {
+    transform: scale(1.08);
+    box-shadow:
+        0 0 25px #00f2ff,
+        0 0 60px rgba(0, 242, 255, 0.9);
+}
+
+/* Mobile adjustment */
+@media (max-width: 600px) {
+    .site-logo {
+        width: 70px;
+        height: 70px;
+        top: 20px;
+        left: 20px;
+    }
+}
     </style>
 </head>
 
 <body>
-
-    <!-- NEW : LOGO -->
-    <div class="college-logo">
-        <img src="logo.jpg" alt="Kakinada Aditya Degree College">
-    </div>
-
-    <!-- NEW : MOVING CORNER LINES -->
-    <div class="corner-line line-top-left"></div>
-    <div class="corner-line line-bottom-right"></div>
-
-    <!-- EXISTING BACKGROUND CANVAS -->
     <canvas id="bg-canvas"></canvas>
-
-    <!-- ===== YOUR ORIGINAL CONTENT BELOW (UNCHANGED) ===== -->
 
     <div class="wrap">
 
+        <!-- HOME PAGE -->
         <div id="home-page" class="card page-section active">
             <pre class="ascii">
      ____     _____      ______           _____   _____   _____   __________
@@ -322,58 +348,88 @@
 |____ /  |_____/   \ ______|         |_|     |_____| |_____/     |__|
             </pre>
             <h1 class="title">BSC ASCII 2K26</h1>
-            <p class="lead">Join us for a vibrant celebration of talent, tech and culture. Select an event below to register.</p>
-            <div class="grid" id="events-grid-container"></div>
-            <footer>Location: College Grounds • Date: March 2026</footer>
+            <p class="lead">Join us for a vibrant celebration of talent, tech and culture. Select an event below to
+                register.</p>
+
+            <div class="grid" id="events-grid-container">
+                <!-- Events populated by JS -->
+            </div>
+
+            <footer>Location: College Grounds • Date:14 March 2026</footer>
         </div>
 
+        <!-- DETAILS PAGE -->
         <div id="details-page" class="card page-section">
             <div style="text-align: left;">
                 <a onclick="showPage('home')" class="back-link">&larr; Back to Events</a>
             </div>
-            <div id="event-details-content" style="margin-bottom: 30px;"></div>
+
+            <div id="event-details-content" style="margin-bottom: 30px;">
+                <!-- Content injected here -->
+            </div>
+
             <div class="form-container">
-                <h3 style="color: var(--highlight); margin-bottom: 15px; border-bottom: 1px solid #333; padding-bottom: 10px;">
-                    Registration Form
-                </h3>
+                <h3
+                    style="color: var(--highlight); margin-bottom: 15px; border-bottom: 1px solid #333; padding-bottom: 10px;">
+                    Registration Form</h3>
                 <form id="registration-form" onsubmit="handleRegister(event)">
                     <input type="hidden" id="event-name" name="event-name">
+
                     <div class="form-group">
                         <label>Full Name</label>
-                        <input type="text" name="name" required>
+                        <input type="text" name="name" required placeholder="Your Name">
                     </div>
+
                     <div class="form-group">
                         <label>Email Address</label>
-                        <input type="email" name="email" required>
+                        <input type="email" name="email" required placeholder="your.email@example.com">
                     </div>
-                    <div class="form-group" style="display:grid;grid-template-columns:1fr 1fr;gap:10px;">
-                        <input type="text" name="group" required placeholder="Group">
-                        <input type="text" name="section" required placeholder="Section">
+
+                    <div class="form-group" style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
+                        <div>
+                            <label>Group</label>
+                            <input type="text" name="group" required placeholder="e.g. 10">
+                        </div>
+                        <div>
+    <label>Section</label>
+    <select name="section" required>
+        <option value="" disabled selected>Select Section</option>
+        <option value="A">A</option>
+        <option value="B">B</option>
+        <option value="C">C</option>
+        <option value="D">DS-A</option>
+        <option value="E">DS-B</option>
+    </select>
+</div>
                     </div>
+
                     <div class="form-group">
+                        <label>Year</label>
                         <select name="year">
                             <option>1</option>
                             <option>2</option>
                             <option selected>3</option>
                         </select>
                     </div>
-                    <button class="btn-register">Confirm Registration</button>
+
+                    <button type="submit" class="btn-register">Confirm Registration</button>
                 </form>
             </div>
         </div>
 
     </div>
-<script>
+
+    <script>
         /* ================= CONFIG ================= */
         const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwJvVEEgE4GEWqW-UesVr4fKvbCvfAXf7dosCPBN5aYYK_otmYuXLBbX2imjLZgiKUc7Q/exec";
 
         /* ================= EVENTS ================= */
         const events = [
-            { id: "TREASURE", title: "Treasure Hunt", date: "March 10, 2026", description: "Live bands, acoustic sessions, and a night full of rhythm and soul." },
-            { id: "WORD", title: "Word Battle", date: "March 11, 2026", description: "Solo & group competitions. Show off your moves and claim the crown." },
-            { id: "CODE", title: "Coding Challenge", date: "March 12, 2026", description: "Algorithms & hackathon. Prove your logic and coding prowess." },
-            { id: "PROJECT", title: "Project Exhibition", date: "March 13, 2026", description: "Paintings & installations. A showcase of student creativity." },
-            { id: "FOOD", title: "Food Stalls", date: "March 14, 2026", description: "Street food stalls with delicacies from around the world." }
+            { id: "Hear&Hack", title: "Hear&Hack", date: "March 10, 2026", description: "Live bands, acoustic sessions, and a night full of rhythm and soul." },
+            { id: "KeySense", title: "KeySence", date: "March 11, 2026", description: "Solo & group competitions. Show off your moves and claim the crown." },
+            { id: "Cryptokey", title: "Cryptokey", date: "March 12, 2026", description: "Build Logic and have fun." },
+            { id: "CodeX", title: "CodeX", date: "March 13, 2026", description: "Algorithms & hackathon. Prove your logic and coding prowess." },
+            { id: "Innowave", title: "Innowave", date: "March 14, 2026", description: "Place where all the new Ideas exihibits." },
         ];
 
         /* ================= INIT ================= */
@@ -522,5 +578,5 @@
 
 
 </body>
-</html>
 
+</html>
