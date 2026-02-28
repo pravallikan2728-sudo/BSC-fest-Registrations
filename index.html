@@ -87,7 +87,7 @@
         }
 
         /* ASCII banner */
-        pre.ascii {
+        pre.acsii {
             font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, monospace;
             line-height: 1;
             margin: 0 0 18px 0;
@@ -293,33 +293,32 @@ select {
         /* ===== Fixed Logo Styling ===== */
 .site-logo {
     position: fixed;
-    top: 35px;        /* space from top */
-    left: 45px;       /* space from left */
-    width: 100px;     /* bigger size */
-    height: 100px;    /* square */
+    top: 0.5cm;      /* 0.5 cm from top */
+    left: 0.5cm;     /* 0.5 cm from left */
+    width: 100px;
+    height: 100px;
     object-fit: cover;
     z-index: 9999;
 
-    border-radius: 10px;   /* slight rounded square */
-    padding: 6px;
+    border-radius: 10px;   /* keep square with slight round */
 
-    background: rgba(0, 0, 0, 0.35);
-    backdrop-filter: blur(6px);
+    /* Removed black background */
+    background: transparent;
+    padding: 0;
 
+    /* Keep glow only */
     box-shadow:
         0 0 15px #00f2ff,
         0 0 35px rgba(0, 242, 255, 0.7);
 
     transition: all 0.4s ease;
 }
-
 .site-logo:hover {
     transform: scale(1.08);
     box-shadow:
         0 0 25px #00f2ff,
         0 0 60px rgba(0, 242, 255, 0.9);
 }
-
 /* Mobile adjustment */
 @media (max-width: 600px) {
     .site-logo {
@@ -334,7 +333,7 @@ select {
 
 <body>
     <canvas id="bg-canvas"></canvas>
-    <img src="logo.jpg" alt="BSC Logo" class="site-logo">
+    <img src="bsclogo.jpeg" alt="BSC Logo" class="site-logo">
 
     <div class="wrap">
 
@@ -581,4 +580,3 @@ select {
 </body>
 
 </html>
-
